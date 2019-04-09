@@ -32,14 +32,14 @@ for k=1:K
 %     zp(k,:) = uloc;
 %     quadm(k,:) = [(k-1)*4+1 (k-1)*4+2 (k-1)*4+3 (k-1)*4+4];
     
-    patch(Vloc(:,1),Vloc(:,2),uloc',uloc');
+    patch(Vloc(:,1),Vloc(:,2),uloc',uloc','edgecolor','none');
     colormap('jet');
     xlim([x0 xN]);
     ylim([y0 yN]);
     hold on;
 end
 
-% pbaspect([1 4 1]);
+pbaspect([1 4 1]);
 % quadmesh(quadm,xp,yp,zp);
 % shading interp;
 return

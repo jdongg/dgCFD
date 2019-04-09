@@ -4,7 +4,7 @@ N = [128];
 
 % computational domain
 x0 = 0;
-xN = 1;
+xN = 1/4;
 y0 = 0;
 yN = 1;
 
@@ -12,7 +12,7 @@ yN = 1;
 p = 1;
 
 % stopping time
-T = 0.25;
+T = 1.55;
 
 % buffer to store L2 error
 L2 = zeros(length(N),1);
@@ -20,7 +20,7 @@ rateL2 = zeros(length(N)-1,1);
 
 for i=1:length(N)
     % set discretization parameters
-    Nx = N(i);
+    Nx = N(i)/4;
     Ny = N(i);
     
     dx = (xN-x0)/Nx;

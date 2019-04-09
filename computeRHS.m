@@ -35,9 +35,9 @@ for k=1:K
     for i=1:Nloc
         rhsQ(k,i,:) = vol*sum(w'.*(dphixV(i,:).*F' + dphiyV(i,:).*G'),2);
         
-%         % gravity terms for RT instability
-%         rhsQ(k,i,3) = rhsQ(k,i,3) + vol*sum(w'.*Q(1,:).*phiV(i,:),2);
-%         rhsQ(k,i,4) = rhsQ(k,i,4) + vol*sum(w'.*Q(3,:).*phiV(i,:),2);
+        % gravity terms for RT instability
+        rhsQ(k,i,3) = rhsQ(k,i,3) + vol*sum(w'.*Q(1,:).*phiV(i,:),2);
+        rhsQ(k,i,4) = rhsQ(k,i,4) + vol*sum(w'.*Q(3,:).*phiV(i,:),2);
     end
     
     
@@ -86,7 +86,13 @@ for k=1:K
     if (idx>1)
         QDown = cD'*phiEdge.Up;
     else
-        QDown = c'*phiEdge.Down;
+%         QDown = c'*phiEdge.Down;
+
+        % RT Dirichlet conditions
+        QDown = [2.0*ones(1,length(w1d));
+                 zeros(1,length(w1d));
+                 zeros(1,length(w1d));
+                 1.0/0.4*ones(1,length(w1d))];
     end
     
     Gh = numericalFluxG(Q',QDown'); 
@@ -113,7 +119,13 @@ for k=1:K
     if (idx<Ny)
         QUp = cU'*phiEdge.Down;
     else
-        QUp = c'*phiEdge.Up;
+%         QUp = c'*phiEdge.Up;
+
+        % RT Dirichlet conditions
+        QUp = [ones(1,length(w1d));
+               zeros(1,length(w1d));
+               zeros(1,length(w1d));
+               2.5/0.4*ones(1,length(w1d))];
     end
     
     Gh = numericalFluxG(QUp',Q');
